@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -23,6 +24,8 @@ public class Friend {
 	private Integer id;
 	
 	@JsonProperty("first-name")
+	
+	@NotNull
 	private String firstName;
 	@JsonProperty("last-name")
 	private String lastName;
@@ -34,8 +37,20 @@ public class Friend {
 	@OneToMany(cascade = CascadeType.ALL)
 	private List<Address> adresses;
 	
-	
+	public Friend() {
+		
+	}
 
+	public Friend(Integer id, @NotNull String firstName, String lastName, Integer age, boolean married,
+			List<Address> adresses) {
+		super();
+		this.id = id;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.age = age;
+		this.married = married;
+		this.adresses = adresses;
+	}
 	public List<Address> getAdresses() {
 		return adresses;
 	}
